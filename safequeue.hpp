@@ -1,9 +1,13 @@
 #pragma once
 
+#include <cassert>
 #include <condition_variable>
+#include <functional>
+#include <iostream>
 #include <mutex>
 #include <optional>
 #include <queue>
+#include <thread>
 #include <utility>
 
 template <typename T> 
@@ -40,3 +44,28 @@ public:
     return v;
   }
 };
+
+// ---------------------------------------------------------------------------
+// Test: ein Producer, zwei Consumer; jeder Wert muss genau einmal ankommen.
+// ---------------------------------------------------------------------------
+
+inline void testSafeQueue() {
+  SafeQueue<int> q;
+  long sum1 = 0, sum2 = 0;
+  auto consume = [&q](long &sum) {
+    while (auto v = q.pop())
+      sum += *v;
+  };
+  std::thread c1(consume, std::ref(sum1));
+  std::thread c2(consume, std::ref(sum2));
+
+  for (int i = 1; i <= 1000; ++i)
+    q.push(i);
+  q.close();
+  c1.join();
+  c2.join();
+
+  assert(sum1 + sum2 == 1000L * 1001 / 2);
+  std::cout << "[SafeQueue] sum=" << sum1 + sum2 << " (c1=" << sum1
+            << ", c2=" << sum2 << ")\n";
+}
