@@ -5,8 +5,7 @@
 
 namespace tst {
 
-// 13.10.2026 Interview question (ingenics munich)
-
+// Common interview problem to solve.
 // This problem is about removing pairs of characters from a string
 // where the characters are the same letter but different cases (e.g., 'a' and
 // 'A'). The goal is to remove such pairs iteratively until no more pairs can be
@@ -49,7 +48,7 @@ std::string remove_case_pairs_optimal(const std::string &str) {
 
 void testCasePairs() {
   std::string test{"aAbcdDEefgHiIjkAaaB"};
-  std::cout << "CasePairs: \t'" << test << "'" << std::endl;
+  std::cout << "[CasePairs] \t'" << test << "'" << std::endl;
   {
     std::string result = test;
     remove_case_pairs_inline(result);
