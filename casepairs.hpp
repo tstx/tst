@@ -1,10 +1,11 @@
 #pragma once
 #include <cctype>
 #include <iostream>
+#include <string>
 
-namespace ingenics {
+namespace tst {
 
-// 13.10.2026 Interview question
+// 13.10.2026 Interview question (ingenics munich)
 
 // This problem is about removing pairs of characters from a string
 // where the characters are the same letter but different cases (e.g., 'a' and
@@ -35,8 +36,8 @@ std::string remove_case_pairs_optimal(const std::string &str) {
   out.reserve(str.size());
   for (char c : str) {
     if (!out.empty() && out.back() != c &&
-        std::tolower(static_cast<unsigned char>(out.back()) ==
-                     std::tolower(static_cast<unsigned char>(c)))) {
+        std::tolower(static_cast<unsigned char>(out.back())) ==
+            std::tolower(static_cast<unsigned char>(c))) {
       out.pop_back(); // Paar wie "aA" oder "Dd" entfernen
     } else {
       out.push_back(c);
@@ -45,17 +46,19 @@ std::string remove_case_pairs_optimal(const std::string &str) {
   return out;
 }
 
-void test() {
-  std::string test{"aAbcdD"};
+
+void testCasePairs() {
+  std::string test{"aAbcdDEefgHiIjkAaaB"};
+  std::cout << "CasePairs: \t'" << test << "'" << std::endl;
   {
     std::string result = test;
     remove_case_pairs_inline(result);
-    std::cout << result << std::endl;
+    std::cout << "Inline: \t'" << result << "'" << std::endl;
   }
   {
     std::string result = remove_case_pairs_optimal(test);
-    std::cout << result << std::endl;
+    std::cout << "Optimal: \t'" << result << "'" << std::endl;
   }
 }
 
-} // namespace ingenics
+} // namespace tst

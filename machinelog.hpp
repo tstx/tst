@@ -24,6 +24,8 @@
 // 210;M2;IDLE
 // 250;M1;IDLE
 
+namespace tst {
+
 enum class Status { Running, Idle, Error };
 
 struct Event {
@@ -218,3 +220,5 @@ inline void testMachineLog() {
   std::cout << "  most error: " << log.machineWithMostError(300).value_or("-")
             << '\n';
 }
+
+} // namespace tst

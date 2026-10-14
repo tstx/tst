@@ -1,8 +1,10 @@
 #include "machinelog.hpp"
 #include "safequeue.hpp"
+#include "casepairs.hpp"
 
 int main() {
-  testMachineLog();
-  testSafeQueue();
+  tst::testMachineLog();
+  tst::testSafeQueue();
+  tst::testCasePairs();
   return 0;
 }

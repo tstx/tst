@@ -10,6 +10,8 @@
 #include <thread>
 #include <utility>
 
+namespace tst {
+
 template <typename T> 
 class SafeQueue {
   std::queue<T> q_;
@@ -65,7 +67,9 @@ inline void testSafeQueue() {
   c1.join();
   c2.join();
 
-  assert(sum1 + sum2 == 1000L * 1001 / 2);
+  assert(sum1 + sum2 == 1000L * 1001 / 2); // Gaußsche Summenformel für 1..n
   std::cout << "[SafeQueue] sum=" << sum1 + sum2 << " (c1=" << sum1
             << ", c2=" << sum2 << ")\n";
 }
+
+} // namespace tst
