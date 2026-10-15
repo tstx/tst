@@ -3,6 +3,7 @@
 #include "casepairs.hpp"
 #include "ringbuffer.hpp"
 #include "ringbuffer_spsc.hpp"
+#include "ringbuffer_mpmc.hpp"
 
 
 int main() {
@@ -11,5 +12,6 @@ int main() {
   tst::testCasePairs();
   tst::testRingBuffer();
   tst::testRingBufferSpsc();
+  tst::testRingBufferMpmc();
   return 0;
 }
